@@ -27,9 +27,9 @@ cd  KronaTools-2.7
 
 #### Read mapping and taxonomic assignment:
 
- * The aligner [KMA](https://bitbucket.org/genomicepidemiology/kma) version 1.1.7
+ * Read mapper: [KMA](https://bitbucket.org/genomicepidemiology/kma) version 1.1.7.
 
- * [CCMetagen](https://github.com/vrmarcelino/CCMetagen) version 1.1.3
+ * Taxonomic organizaion: [CCMetagen](https://github.com/vrmarcelino/CCMetagen) version 1.1.3.
 These versions can also be found in the folder [00_software](https://github.com/vrmarcelino/CriticalAss2/tree/master/00_software), and kma needs to be installed with `make`.
 
 
@@ -44,7 +44,27 @@ For the marine challenge, I used Trimmomatic v.0.38.
 
 
 
-## Database
+## Database construction
+
+After downloading the NCBI nt database as of 2019/01/08 and the NCBI accession to taxid mapping as of 2019/01/08 from the CAMI website, these steps were followed:
+
+All PBS scripts and custom python scripts can be found in the [01_nt_database folder](https://github.com/vrmarcelino/CriticalAss2/tree/master/01_nt_database).
+
+1: Remove entries from nt without a taxid from the accession2taxonomy NCBI file using a custom python script (remove_unclassififed_from_acc2taxidmap.py).
+2: Convert the interleaved fasta to sequential fasta.
+3: Add a taxid to the nt sequence headers, excluding sequences that do not have a taxid with rename_clean_nt.py
+4: Built a KMA index
+
+Again - commands for each of these steps are given [here](https://github.com/vrmarcelino/CriticalAss2/tree/master/01_nt_database).
+
+
+
+## Pathogen challenge
+
+Step 1: Run kneaddata:
+
+
+
 
 
 

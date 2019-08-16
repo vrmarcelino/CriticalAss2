@@ -28,8 +28,3 @@ for r1 in $input_dir/*reads.R1.fq; do
 	trimmomatic PE -threads $th -phred33 $r1 $r2 $o.R1_good $o.R1_unpaired $o.R2_good $o.R2_unpaired SLIDINGWINDOW:4:20 MINLEN:70
 done
 
-
-# sample #3 (done later)
-#rimmomatic PE -threads $th -phred33 reads/marmgCAMI2_short_read_sample_3_reads.R1.fq reads/marmgCAMI2_short_read_sample_3_reads.R2.fq marmgCAMI2_short_read_sample_3_R1_good marmgCAMI2_short_read_sample_3_R1_unpaired marmgCAMI2_short_read_sample_3_R2_good marmgCAMI2_short_read_sample_3_R2_unpaired SLIDINGWINDOW:4:20 MINLEN:70
-
-

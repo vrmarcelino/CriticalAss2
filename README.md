@@ -117,11 +117,61 @@ CCMetagen_merge.py -i 03_CCMetagen -kr r -tlist Eukaryota -l Superkingdom -o mic
 
 ## Marine challenge
 
-The PBS scripts for these two steps can be found in the folder [03_marine](https://github.com/vrmarcelino/CriticalAss2/tree/master/03_marine)
+The PBS scripts can be found in the folder [03_marine](https://github.com/vrmarcelino/CriticalAss2/tree/master/03_marine)
+
+**Step 1** Quality control:
+
+First deinterleave reads, using the [deinterleave_fastq.sh](https://gist.github.com/nathanhaigh/4544979) code written by Nathan Watson-Haigh.
+```
+bash deinterleave_fastq.sh < $r12 $o.R1.fq $o.R2.fq
+```
+Where $r12 is the interleaced input fastq, and $o is the output.
+
+Then run Trimmomatic:
+```
+trimmomatic PE -threads $10 -phred33 $r1 $r2 $o.R1_good $o.R1_unpaired $o.R2_good $o.R2_unpaired SLIDINGWINDOW:4:20 MINLEN:70
+```
+
+**Step 2** Run KMA:
+
+Map reads to the nt database with KMA. For each sample, run:
+
+```
+kma -ipe $r1 $r2 -o $o -t_db ncbi_nt_cami -t 4 -1t1 -mem_mode -and -apm f
+```
+
+**Step 3** Run CCMetagen:
+
+Here, use the .res output from KMA as input for CCMetagen ($r12 below)
+```
+CCMetagen.py -i $r12 -o $o
+```
+
+After running that for all samples, use CCmetagen_merge to check the results:
+```
+CCMetagen_merge.py -i 03_CCMetagen -o all_samples_and_taxa_marine # only used to verify results
+```
+
+This allows us to flag obvious errors (possible assembly errors in the nt database) and sequences not belonging to the microbiome, which we would normally remove before further analyses.
+```
+CCMetagen_merge.py -i 03_CCMetagen -kr r -tlist Mammalia,Insecta,Oomycetes -l Class -o all_samples_marine_only # final results
+```
 
 
+**Step 5** Convert to Cami:
+Finally, we need to convert the CCMetagen results to the CAMI2 format. 
+As they require one file per sample, I removed the taxa filtered out with CCMetagen_merge (whihc produces one table for all samples) from the oiginal CCMetagen .csv files (one per sample) using sed:
 
+```
+sed -i.bak '/Mammalia,/d' $r12
+```
+Repeat the above for OOmycetes and Insecta.
 
+Then I used a Python script to convert the .csv files to the cami .profile files:
+
+```
+ccm2cami.py -i $r12 -n $sample_name -o $o
+```
 
 
 

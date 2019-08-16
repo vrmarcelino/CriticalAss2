@@ -2,8 +2,6 @@
 #PBS -P FGEN
 #PBS -l select=1:ncpus=4:mem=600GB
 #PBS -l walltime=120:00:00
-#PBS -M vanessa.marcelino@sydney.edu.au
-#PBS -m ae
 
 # using new 'clean' database and newest version of CCMetagen (v.1.2.3)
 # also using old kma (KMA-1.1.7)

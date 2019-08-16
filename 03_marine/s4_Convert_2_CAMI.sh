@@ -16,12 +16,11 @@ mkdir $output_dir
 
 
 ## Remove taxa filtered out in CCMetagen_merge (Mammalia,Insecta,Oomycetes), keeping a backup file with original contents (.bak)
-## Original files also saved in dropbox
-#for r12 in $input_dir/*.csv; do
-#	sed -i.bak '/Mammalia,/d' $r12
-#	sed -i '/Oomycetes,/d' $r12
-#	sed -i '/Insecta,/d' $r12
-#done
+for r12 in $input_dir/*.csv; do
+	sed -i.bak '/Mammalia,/d' $r12
+	sed -i '/Oomycetes,/d' $r12
+	sed -i '/Insecta,/d' $r12
+done
 
 
 ## Now convert to CAMI2 format:

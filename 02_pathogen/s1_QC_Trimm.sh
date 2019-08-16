@@ -2,8 +2,7 @@
 #PBS -P FGEN
 #PBS -l select=1:ncpus=6:mem=100GB
 #PBS -l walltime=12:00:00
-#PBS -M vanessa.marcelino@sydney.edu.au
-#PBS -m ae
+
 
 cd $PBS_O_WORKDIR
 

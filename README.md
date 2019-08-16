@@ -6,8 +6,8 @@ Description of the steps used to analyse CAMI II datasets with KMA and CCMetagen
 
 #### Dependencies:
 
-  * [Python 3.6](https://www.python.org/downloads/)
-CCMetagen requires Python modules [pandas (>0.23)](https://pandas.pydata.org/) and [ETE3](http://etetoolkit.org/). The easiest way to install these modules is via conda or pip:
+  * [Python 3.6.5](https://www.python.org/downloads/)
+CCMetagen requires Python modules [used version (0.23.4)](https://pandas.pydata.org/) and [ETE3](http://etetoolkit.org/). The easiest way to install these modules is via conda or pip:
 
 `conda install pandas`
 

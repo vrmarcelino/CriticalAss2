@@ -16,7 +16,7 @@ CCMetagen requires Python modules [pandas (>0.23)](https://pandas.pydata.org/) a
 `sudo apt-get install libz-dev`
 
 
-  * [Krona](https://github.com/marbl/Krona) is required for graphs in CCMetagen. They are not used in these datasets, but it will return an error if not installed. If you don;t want to install krona, you can run CCMetagen with the flag -m text,w hich will not affect the results.
+  * [Krona](https://github.com/marbl/Krona) is required for graphs in CCMetagen. They are not used in these datasets, but it will return an error if not installed. If you don't want to install krona, you can run CCMetagen with the flag -m text, which will not affect the results.
 
 ```
 wget https://github.com/marbl/Krona/releases/download/v2.7/KronaTools-2.7.tar
@@ -29,8 +29,8 @@ cd  KronaTools-2.7
 
  * Read mapper: [KMA](https://bitbucket.org/genomicepidemiology/kma) version 1.1.7.
 
- * Taxonomic organizaion: [CCMetagen](https://github.com/vrmarcelino/CCMetagen) version 1.1.3.
-These versions can also be found in the folder [00_software](https://github.com/vrmarcelino/CriticalAss2/tree/master/00_software), and kma needs to be installed with `make`.
+ * Ranked taxonomic profiling: [CCMetagen](https://github.com/vrmarcelino/CCMetagen) version 1.1.3.
+These versions can also be found in the folder [00_software](https://github.com/vrmarcelino/CriticalAss2/tree/master/00_software), and KMA needs to be installed with `make`.
 
 
 #### Quality control:
@@ -125,7 +125,7 @@ First deinterleave reads, using the [deinterleave_fastq.sh](https://gist.github.
 ```
 bash deinterleave_fastq.sh < $r12 $o.R1.fq $o.R2.fq
 ```
-Where $r12 is the interleaced input fastq, and $o is the output.
+Where $r12 is the interleaved input fastq, and $o is the output.
 
 Then run Trimmomatic:
 ```
@@ -160,20 +160,20 @@ CCMetagen_merge.py -i 03_CCMetagen -kr r -tlist Mammalia,Insecta,Oomycetes -l Cl
 
 **Step 5** Convert to Cami:
 Finally, we need to convert the CCMetagen results to the CAMI2 format. 
-As they require one file per sample, I removed the taxa filtered out with CCMetagen_merge (whihc produces one table for all samples) from the oiginal CCMetagen .csv files (one per sample) using sed:
+As they require one file per sample, I removed the taxa filtered out with CCMetagen_merge (whihc produces one table for all samples) from the original CCMetagen .csv files (one per sample) using sed:
 
 ```
 sed -i.bak '/Mammalia,/d' $r12
 ```
-Repeat the above for OOmycetes and Insecta.
+Repeat the above for Oomycetes and Insecta.
 
 Then I used a Python script to convert the .csv files to the cami .profile files:
 
 ```
 ccm2cami.py -i $r12 -n $sample_name -o $o
 ```
+The ccm2cami.py script and dependencies can be found [here](https://github.com/vrmarcelino/CriticalAss2/tree/master/03_marine/convertion_scrips)
 
-
-
+Done!
 
 

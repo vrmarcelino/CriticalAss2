@@ -4,7 +4,7 @@
 Convert CCMetagen results to CAMI format
 
 @ V.R.Marcelino
-Created on Fri Aug  9 09:19:47 2019
+Created on Aug 19 2019
 
 """
 import pandas as pd
@@ -240,8 +240,8 @@ header = []
 header.append("# Taxonomic Profiling Output")
 sample_ID_line = "@SampleID:" + sample_name
 header.append(sample_ID_line)
-header.append("@Version:1.1.3")
-header.append("@Ranks:superkingdom|phylum|class|order|family|genus|species")
+header.append("@Version:0.9.1")
+header.append("@Ranks:superkingdom|phylum|class|order|family|genus|species|strain")
 header.append("@TaxonomyID:ncbi-taxonomy_2019_01_08")
 
 

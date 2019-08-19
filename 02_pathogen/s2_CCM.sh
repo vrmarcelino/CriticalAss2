@@ -1,5 +1,5 @@
 #!/bin/bash
-#PBS -P MYCOB
+#PBS -P FGEN
 #PBS -l select=1:ncpus=4:mem=500GB
 #PBS -l walltime=1:00:00
 

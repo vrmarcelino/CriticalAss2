@@ -38,7 +38,7 @@ These versions can also be found in the folder [00_software](https://github.com/
 For the pathogen challenge, I used [KneadData](http://huttenhower.sph.harvard.edu/kneaddata) v0.6.1 to filter out human and low quality sequences.
 kneaddata used Bowtie2 v.2.2.5 and Trimmomatic v.0.38.
 
-I used the human transcriptome (hg38) reference database to filter out human reads, which can be downloaded as: `kneaddata_database --download human_transcriptome bowtie2 $DIR`. 
+I used the human reference database (hg37_and_human_contamination) to filter out human reads, which can be downloaded as: `kneaddata_database --download human_genome bowtie2 $DIR`. 
 
 For the marine challenge, I used Trimmomatic v.0.38.
 
@@ -157,7 +157,6 @@ This allows us to flag obvious errors (possible assembly errors in the nt databa
 CCMetagen_merge.py -i 03_CCMetagen -kr r -tlist Mammalia,Insecta,Oomycetes -l Class -o all_samples_marine_only # final results
 ```
 
-
 **Step 5** Convert to Cami:
 Finally, we need to convert the CCMetagen results to the CAMI2 format. 
 As they require one file per sample, I removed the taxa filtered out with CCMetagen_merge (whihc produces one table for all samples) from the original CCMetagen .csv files (one per sample) using sed:
@@ -174,6 +173,9 @@ ccm2cami.py -i $r12 -n $sample_name -o $o
 ```
 The ccm2cami.py script and dependencies can be found [here](https://github.com/vrmarcelino/CriticalAss2/tree/master/03_marine/convertion_scrips)
 
+The profiles of all samples were concatenated into a single file: `cat *.profile > all_short_read_samples.profile` and the fingerprint was generated on the concatenated file.
+
 Done!
+
 
 
